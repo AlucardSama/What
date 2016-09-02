@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by zheng on 2016/9/1.
@@ -13,6 +15,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
     private OnItemClickListener listener;
+    private View rootView;
 
     public RecyclerViewAdapter(Context mContext) {
         this.mContext = mContext;
@@ -20,20 +23,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =
+        rootView =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_card_main, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, int position) {
-        final View view = holder.mView;
-        view.setOnClickListener(new View.OnClickListener() {
+        rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick();
             }
         });
+        holder.tv_desc.setText("这是第"+(position+1)+"个Item");
+
     }
 
     @Override
@@ -42,21 +46,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
+        private ImageView iv_img;
+        private TextView tv_desc;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
+            iv_img = (ImageView) view.findViewById(R.id.iv_img);
+            tv_desc = (TextView) view.findViewById(R.id.tv_desc);
+
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener=listener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
 
     public interface OnItemClickListener {
         void onItemClick();
+
         void onItemLongClick();
     }
 
