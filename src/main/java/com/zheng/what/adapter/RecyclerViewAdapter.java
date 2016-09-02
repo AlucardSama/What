@@ -40,17 +40,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 listener.onItemClick();
             }
         });
-        holder.tv_desc.setText("这是第"+(position+1)+"个Item");
 
+        holder.tv_desc.setText("这是第"+(position+1)+"个Item");
+        //Glide 加载图片
         Glide.with(mContext)
                 .load("http://img1.imgtn.bdimg.com/it/u=998216620,3976144567&fm=21&gp=0.jpg")
-                .asGif()
+                //.asGif()
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.photo)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .crossFade()
                 .into(holder.iv_img);
-
     }
 
     @Override

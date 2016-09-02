@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity
 
     private TabLayout tlMain;
     private ViewPager vpMain;
-    private String [] mTitles={"笑话大全","天气预报","TAB 3","TAB 4","TAB 5","TAB 6","TAB 7"};
-
-
+    private String [] mTitles={"头条","社会","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

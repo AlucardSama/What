@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zheng.what.activity.DetailActivity;
 import com.zheng.what.R;
+import com.zheng.what.activity.DetailActivity;
 import com.zheng.what.adapter.RecyclerViewAdapter;
 
 /**
@@ -67,5 +67,46 @@ public class BaseFragment extends Fragment {
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            onVisibleToUser();
+        }
+        else{
+            onUnvisibleToUser();
+        }
+
+
+    }
+
+    private void onUnvisibleToUser() {
+    }
+
+    private void onVisibleToUser() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .baseUrl("http://v.juhe.cn/toutiao/")
+//                .build();
+//
+//        NewsService newsService=retrofit.create(NewsService.class);
+//
+//        rx.Observable<NewsList> githubBeanObservable=newsService.getNewsList("top");
+//
+//        githubBeanObservable.subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<NewsList>() {
+//                    @Override
+//                    public void call(NewsList githubBean) {
+//
+//                        Toast.makeText(getActivity(),"成功",Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//                });
+
+
+    }
 
 }
