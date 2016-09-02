@@ -3,5 +3,6 @@
     android:id="@+id/rv_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ccd6d3d3"
     >
 </android.support.v7.widget.RecyclerView>

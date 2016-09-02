@@ -1,4 +1,4 @@
-package com.zheng.what;
+package com.zheng.what.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.zheng.what.R;
 
 /**
  * Created by zheng on 2016/9/1.
@@ -38,6 +42,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
         holder.tv_desc.setText("这是第"+(position+1)+"个Item");
 
+        Glide.with(mContext)
+                .load("http://img1.imgtn.bdimg.com/it/u=998216620,3976144567&fm=21&gp=0.jpg")
+                .asGif()
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.photo)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .crossFade()
+                .into(holder.iv_img);
+
     }
 
     @Override
@@ -53,7 +66,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(view);
             iv_img = (ImageView) view.findViewById(R.id.iv_img);
             tv_desc = (TextView) view.findViewById(R.id.tv_desc);
-
         }
     }
 

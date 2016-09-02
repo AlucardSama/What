@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zheng.what.adapter.RecyclerViewAdapter;
+
 /**
  * Created by zheng on 2016/9/1.
  */
