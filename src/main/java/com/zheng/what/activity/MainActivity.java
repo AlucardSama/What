@@ -1,4 +1,4 @@
-package com.zheng.what;
+package com.zheng.what.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.zheng.what.R;
 import com.zheng.what.adapter.MyPagerAdapter;
 
 public class MainActivity extends AppCompatActivity

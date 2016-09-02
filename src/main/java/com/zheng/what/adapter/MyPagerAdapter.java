@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.zheng.what.BaseFragment;
+import com.zheng.what.fragment.BaseFragment;
 
 /**
  * Created by zheng on 2016/9/1.

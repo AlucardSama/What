@@ -1,4 +1,4 @@
-package com.zheng.what;
+package com.zheng.what.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zheng.what.activity.DetailActivity;
+import com.zheng.what.R;
 import com.zheng.what.adapter.RecyclerViewAdapter;
 
 /**
