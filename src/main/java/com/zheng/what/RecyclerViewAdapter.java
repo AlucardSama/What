@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private Context mContext;
+    private OnItemClickListener listener;
 
     public RecyclerViewAdapter(Context mContext) {
         this.mContext = mContext;
@@ -30,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listener.onItemClick();
             }
         });
     }
@@ -48,4 +49,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mView = view;
         }
     }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener=listener;
+    }
+
+
+    public interface OnItemClickListener {
+        void onItemClick();
+        void onItemLongClick();
+    }
+
+
 }

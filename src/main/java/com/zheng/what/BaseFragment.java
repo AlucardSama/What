@@ -41,24 +41,27 @@ public class BaseFragment extends Fragment {
         mRecyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_bse, container, false);
         return mRecyclerView;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(getActivity()));
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity());
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-              startActivity(new Intent(getActivity(),DetailActivity.class));
+            public void onItemClick() {
+               startActivity(new Intent(getActivity(),DetailActivity.class));
+            }
+
+            @Override
+            public void onItemLongClick() {
+
             }
         });
 
 
     }
-
-
-
-
 
 
 }
