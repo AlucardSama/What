@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -27,6 +28,9 @@ public class DetailActivity extends AppCompatActivity {
 
 
         WebView wvContent= (WebView) findViewById(R.id.wv_content);
+        WebSettings settings=wvContent.getSettings();
+        settings.setJavaScriptEnabled(true);//允许JS
+
         wvContent.setWebViewClient(new MyWebViewClient());
         wvContent.loadUrl(url);
 

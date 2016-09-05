@@ -17,6 +17,20 @@ import android.view.View;
 
 import com.zheng.what.R;
 import com.zheng.what.adapter.MyPagerAdapter;
+import com.zheng.what.fragment.BaseFragment;
+import com.zheng.what.fragment.CaijingNewsFragment;
+import com.zheng.what.fragment.GuojiNewsFragment;
+import com.zheng.what.fragment.GuoneiNewsFragment;
+import com.zheng.what.fragment.JunshiNewsFragment;
+import com.zheng.what.fragment.KejiNewsFragment;
+import com.zheng.what.fragment.ShehuiNewsFragment;
+import com.zheng.what.fragment.ShishangNewsFragment;
+import com.zheng.what.fragment.TiyuNewsFragment;
+import com.zheng.what.fragment.TopNewsFragment;
+import com.zheng.what.fragment.YuleNewsFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tlMain;
     private ViewPager vpMain;
     private String [] mTitles={"头条","社会","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
+    private List<BaseFragment> mFragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +75,40 @@ public class MainActivity extends AppCompatActivity
         //viewpager
         vpMain= (ViewPager) findViewById(R.id.vp_main);
 
-        MyPagerAdapter myPagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),mTitles);
+        //初始化fragment
+        mFragmentList=new ArrayList<>();
+
+        BaseFragment topNewsFragment= TopNewsFragment.newInstance();
+        mFragmentList.add(topNewsFragment);
+
+        BaseFragment shehuiNewsFragment= ShehuiNewsFragment.newInstance();
+        mFragmentList.add(shehuiNewsFragment);
+
+        BaseFragment guineiNewsFragment= GuoneiNewsFragment.newInstance();
+        mFragmentList.add(guineiNewsFragment);
+
+        BaseFragment guojiNewsFragment= GuojiNewsFragment.newInstance();
+        mFragmentList.add(guojiNewsFragment);
+
+        BaseFragment yuleNewsFragment= YuleNewsFragment.newInstance();
+        mFragmentList.add(yuleNewsFragment);
+
+        BaseFragment tiyuNewsFragment= TiyuNewsFragment.newInstance();
+        mFragmentList.add(tiyuNewsFragment);
+
+        BaseFragment junshiNewsFragment= JunshiNewsFragment.newInstance();
+        mFragmentList.add(junshiNewsFragment);
+
+        BaseFragment kejiNewsFragment= KejiNewsFragment.newInstance();
+        mFragmentList.add(kejiNewsFragment);
+
+        BaseFragment caijingNewsFragment= CaijingNewsFragment.newInstance();
+        mFragmentList.add(caijingNewsFragment);
+
+        BaseFragment shishangNewsFragment= ShishangNewsFragment.newInstance();
+        mFragmentList.add(shishangNewsFragment);
+
+        MyPagerAdapter myPagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),mTitles,mFragmentList);
         vpMain.setAdapter(myPagerAdapter);
 
         tlMain.setupWithViewPager(vpMain);
