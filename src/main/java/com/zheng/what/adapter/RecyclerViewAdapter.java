@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zheng.what.R;
+import com.zheng.what.bean.NewsList;
+
+import java.util.List;
 
 /**
  * Created by zheng on 2016/9/1.
@@ -20,9 +23,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private OnItemClickListener listener;
     private View rootView;
+    private List<NewsList.ResultBean.DataBean> newsData;
 
-    public RecyclerViewAdapter(Context mContext) {
+    public RecyclerViewAdapter(Context mContext,List<NewsList.ResultBean.DataBean> newsData) {
         this.mContext = mContext;
+        this.newsData=newsData;
     }
 
     @Override
@@ -33,18 +38,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, final int position) {
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick();
+                listener.onItemClick(position);
             }
         });
-
-        holder.tv_desc.setText("这是第"+(position+1)+"个Item");
+        NewsList.ResultBean.DataBean dataBean=newsData.get(position);
+        holder.tv_desc.setText(dataBean.getTitle());
         //Glide 加载图片
         Glide.with(mContext)
-                .load("http://img1.imgtn.bdimg.com/it/u=998216620,3976144567&fm=21&gp=0.jpg")
+                .load(dataBean.getThumbnail_pic_s())
                 //.asGif()
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.photo)
@@ -55,7 +60,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 10;
+        return newsData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -75,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     public interface OnItemClickListener {
-        void onItemClick();
+        void onItemClick(int position);
 
         void onItemLongClick();
     }
