@@ -1,6 +1,7 @@
 package com.zheng.what.fragment;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.zheng.what.activity.DetailActivity;
 import com.zheng.what.adapter.RecyclerViewAdapter;
@@ -11,8 +12,8 @@ import com.zheng.what.utils.Constants;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -38,6 +39,7 @@ public class TopNewsFragment extends BaseFragment {
     @Override
     public void onVisibleToUser() {
 
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -46,14 +48,26 @@ public class TopNewsFragment extends BaseFragment {
 
         NewsService newsService = retrofit.create(NewsService.class);
 
-        rx.Observable<NewsList> githubBeanObservable = newsService.getNewsList("top", Constants.KEY);
+        rx.Observable<NewsList> topNewsObservable = newsService.getNewsList("top", Constants.KEY);
 
-        githubBeanObservable.subscribeOn(Schedulers.newThread())
+        topNewsObservable
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<NewsList>() {
+                .subscribe(new Subscriber<NewsList>() {
                     @Override
-                    public void call(final NewsList newsList) {
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getActivity(), "网络请求失败" + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onNext(final NewsList newsList) {
                         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), newsList.getResult().getData());
                         mRecyclerView.setAdapter(adapter);
                         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
@@ -71,8 +85,6 @@ public class TopNewsFragment extends BaseFragment {
                             }
                         });
                     }
-
-
                 });
 
 
